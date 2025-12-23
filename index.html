@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expense Tracker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>Expense Tracker</h2>
+
+<!-- LOGIN -->
+<div id="authBox" class="box">
+    <input id="username" placeholder="Username">
+    <input id="password" type="password" placeholder="Password">
+    <button onclick="login()">Login / Register</button>
+    <p id="authMsg"></p>
+</div>
+
+<!-- APP -->
+<div id="app" style="display:none">
+
+<div class="top-actions">
+    <button onclick="showHelp()">How to Use</button>
+    <button onclick="logout()">Logout</button>
+</div>
+
+<div class="box">
+    <input id="monthlyBudget" type="number" placeholder="Monthly Budget">
+    <button onclick="setBudget()">Set Budget</button>
+    <button onclick="resetAll()">Reset</button>
+    <p id="budgetInfo"></p>
+</div>
+
+<div class="daily-budget">
+    Daily Budget: ₹<span id="dailyBudgetText">0</span>
+</div>
+
+<div class="box">
+    <input id="title" placeholder="Expense Title">
+    <input id="amount" type="number" placeholder="Amount">
+    <input id="date" type="date">
+    <button onclick="addExpense()">Add / Update</button>
+</div>
+
+<div class="calendar-header">
+    <button onclick="prevMonth()">◀</button>
+    <h3 id="monthLabel"></h3>
+    <button onclick="nextMonth()">▶</button>
+</div>
+
+<div id="calendar"></div>
+
+<h3 id="selectedDayTitle">Select a day</h3>
+<ul id="dayList"></ul>
+
+<hr>
+
+<h3>Monthly Expenses</h3>
+<ul id="monthlyList"></ul>
+
+</div>
+
+<!-- HELP POPUP -->
+<div id="helpPopup" class="popup">
+    <div class="popup-content">
+        <h3>How to Use</h3>
+        <ul>
+            <li>Login or register</li>
+            <li>Set monthly budget</li>
+            <li>Daily budget auto-calculated</li>
+            <li>Add expenses only for today or past</li>
+            <li>Calendar colors show spending status</li>
+            <li>Tap a day to view expenses</li>
+        </ul>
+        <button onclick="closeHelp()">Close</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
