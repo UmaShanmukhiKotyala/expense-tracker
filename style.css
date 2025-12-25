@@ -5,13 +5,9 @@
 body {
     font-family: Arial, sans-serif;
     background: #f4f4f4;
-    text-align: center;
     margin: 0;
     padding: 10px;
-}
-
-h2 {
-    margin-top: 10px;
+    text-align: center;
 }
 
 .box {
@@ -26,15 +22,27 @@ input, button {
     font-size: 16px;
 }
 
-button {
-    cursor: pointer;
-}
-
 .top-actions {
     display: flex;
     justify-content: space-between;
     max-width: 500px;
     margin: 0 auto 10px;
+}
+
+/* SUMMARY */
+.summary {
+    display: flex;
+    justify-content: space-around;
+    background: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    max-width: 500px;
+    margin: 10px auto;
+}
+
+.summary .negative {
+    color: red;
+    font-weight: bold;
 }
 
 .daily-budget {
@@ -108,20 +116,4 @@ li {
     width: 90%;
     max-width: 350px;
     border-radius: 6px;
-}
-
-/* MOBILE OPTIMIZATION */
-@media (max-width: 480px) {
-    h2 {
-        font-size: 20px;
-    }
-
-    .day {
-        padding: 10px 0;
-        font-size: 13px;
-    }
-
-    .calendar-header h3 {
-        font-size: 16px;
-    }
 }
