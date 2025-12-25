@@ -34,7 +34,7 @@ function logout() {
     app.style.display = "none";
 }
 
-/* ---------- LOAD USER ---------- */
+/* ---------- LOAD / SAVE ---------- */
 function loadUser(firstLogin) {
     const u = users[currentUser];
     expenses = u.expenses;
@@ -70,7 +70,14 @@ function closeHelp() {
 
 /* ---------- BUDGET ---------- */
 function setBudget() {
-    monthlyBudget = Number(monthlyBudgetInput.value);
+    const newBudget = Number(monthlyBudgetInput.value);
+    if (!newBudget) return;
+
+    if (monthlyBudget && newBudget > monthlyBudget) {
+        alert(`Monthly budget increased from ₹${monthlyBudget} to ₹${newBudget}`);
+    }
+
+    monthlyBudget = newBudget;
     saveUser();
     render();
 }
@@ -222,12 +229,38 @@ function renderMonthlyList() {
     });
 }
 
+/* ---------- SUMMARY ---------- */
+function renderSummary() {
+    const month = viewDate.getMonth();
+    const year = viewDate.getFullYear();
+
+    const monthExpenses = expenses.filter(e => {
+        const d = new Date(e.date);
+        return d.getMonth() === month && d.getFullYear() === year;
+    });
+
+    const spent = monthExpenses.reduce((s,e)=>s+e.amount,0);
+    const remaining = monthlyBudget - spent;
+
+    document.getElementById("summaryBudget").textContent = monthlyBudget;
+    document.getElementById("summarySpent").textContent = spent;
+
+    const remEl = document.getElementById("summaryRemaining");
+    if (remaining < 0) {
+        remEl.textContent = `${Math.abs(remaining)} overspent`;
+        remEl.classList.add("negative");
+    } else {
+        remEl.textContent = remaining;
+        remEl.classList.remove("negative");
+    }
+}
+
 /* ---------- MAIN ---------- */
 function render() {
     renderCalendar();
     renderDayList();
     renderMonthlyList();
-    budgetInfo.textContent = `Monthly Budget: ₹${monthlyBudget}`;
+    renderSummary();
 }
 
 /* ---------- INIT ---------- */
